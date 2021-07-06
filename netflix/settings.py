@@ -16,7 +16,7 @@ import cloudinary
 import cloudinary.uploader
 import cloudinary.api
 
-# import django_heroku
+import django_heroku
 
 from decouple import config
 
@@ -175,4 +175,4 @@ cloudinary.config(
   api_secret = config('api_secret') 
 )
 
-# django_heroku.settings(locals())
+django_heroku.settings(locals())
