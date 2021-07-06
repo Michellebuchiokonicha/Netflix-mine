@@ -33,7 +33,7 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*','https://netflix-mine.herokuapp.com/','netflix-mine.herokuapp.com']
+ALLOWED_HOSTS = ['*','https://https://netflix-pjt.herokuapp.com','netflix-pjt.herokuapp.com']
 
 
 # Application definition
