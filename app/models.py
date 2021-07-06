@@ -36,9 +36,15 @@ class Movie(models.Model):
     flyer=CloudinaryField('image')
     age_limit=models.CharField(max_length=5,choices=AGE_CHOICES,blank=True,null=True)
 
+    def __str__(self) -> str:
+        return self.title
+
 class Video(models.Model):
     title:str = models.CharField(max_length=225,blank=True,null=True)
     file=models.FileField(upload_to='movies')
+
+    def __str__(self) -> str:
+        return self.title
     
     
 
