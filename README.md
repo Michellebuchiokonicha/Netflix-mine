@@ -1,2 +1,2 @@
 # Netflix-mine
-Zuri project Netflix
+Zuri Netflix project 
