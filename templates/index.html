@@ -1,91 +1,226 @@
-{% extends 'base.html' %}
+<!DOCTYPE html>
 {% load static %}
-{% block title %}
-    Netflix-home
-{% endblock title %}
-
-
-{% block others %}
-<script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
-{% endblock others %}
-    
-
-{% block content %}
-
-    {% include "partials/navbar.html" %}
-    <header class="min-h-screen bg-black bg-opacity-75 showcase border-gray-600 border-b-8 flex justify-center items-center bg-no-repeat"  style="background-image: url('{% static 'background_netflix.jpg' %}')">
-        <div class="z-10 h-full py-32 md:py-0 text-gray-100 text-center flex items-center flex-col">
-            <h1 class="font-semibold text-4xl md:text-5xl w-10/12 md:w-3/4 text-center">
-                Unlimited movies, TV shows, and more.
-            </h1>
-            <h3 class="text-xl md:text-xl py-5">
-                Watch anywhere. Cancel anytime.
-            </h3>
-            <h4 class="text-sm md:text-lg pb-3">
-                Ready to watch? Enter your email to create or restart your membership.
-            </h4>
-
-            <div class="w-full flex justify-center">
-                <div class="flex justify-center items-center w-11/12 md:w-10/12">
-                    <input type="email" name="" id="" placeholder="Email address" class="md:py-5 py-4 px-2 placeholder-gray-500 rounded-tl-sm rounded-bl-sm outline-none  text-gray-900 bg-gray-50 block w-8/12 md:w-3/4">
-                    <a href='{% url "account_signup" %}' class='md:w-1/4'>
-                    
-                        <button class="bg-primary_red font-medium md:font-normal flex justify-center items-center py-4 px-2 md:px-0 rounded-br-sm rounded-tr-sm md:text-2xl">
-                            <span>
-                                Get Started
-                            </span>
-                            <ion-icon name="chevron-forward-outline" class="text-2xl"></ion-icon>
-                        </button>
-                    </a>
-                </div>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Netflix</title>
+    <link rel="stylesheet"   href="{% static 'main.css' %} ">
+</head>
+<body>
+    <header class="showcase">
+        <div class="showcase-top">
+            <img src="https://i.ibb.co/r5krrdz/logo.png" alt="" />
+            {% if AUTH != 'false'  %}
+            {% if request.user.is_authenticated %}
+            <div>
+            <form action="{% url 'account_logout' %}" method="post">
+                {% csrf_token %}
+                <button class="btn btn-rounded">
+                    Logout
+                </button>
+            </form>
             </div>
+            {% else %}
+            <div>
+            <a class="btn btn-rounded" href="{% url 'account_login' %}">
+
+                
+                    Sign In 
+                
+            </a>
+            </div>
+            {% endif %}
+        {% endif %}
+        </div>
+        <div class="showcase-content">
+            <h1>See what's next</h1>
+            <p>Watch anywhere. Cancel Anytime</p>
+            <a href="#" class="btn btn-xl"
+                >Watch Free For 30 Days <i class="fas fa-chevron-right btn-icon"></i
+            ></a>
         </div>
     </header>
-
-    <section class='flex flex-col md:flex-row items-center border-gray-900 border-b-8' style="min-height: 70vh;">
-        <div class="md:w-1/2 flex flex-col justify-center text-center md:text-left p-5 md:p-10 ">
-            <h2 class="md:text-5xl text-4xl font-semibold mb-4">
-                Enjoy on your TV.
-            </h2>
-            <h5 class="md:text-xl text-lg">
-                Watch on Smart TVs, Playstation, Xbox, Chromecast, Apple TV, Blu-ray players, and more.
-            </h5>
+    <section class="tabs">
+        <div class="container">
+            <div id="tab-1" class="tab-item tab-border">
+                <i class="fas fa-door-open fa-3x"></i>
+                <p class="hide-sm">Cancel at any time</p>
+            </div>
+            <div id="tab-2" class="tab-item">
+                <i class="fas fa-tablet-alt fa-3x"></i>
+                <p class="hide-sm">Watch anywhere</p>
+            </div>
+            <div id="tab-3" class="tab-item">
+                <i class="fas fa-tags fa-3x"></i>
+                <p class="hide-sm">Pick your price</p>
+            </div>
         </div>
-        <div class='md:w-1/2 flex justify-center items-center'>
-            <img src="{% static 'tv.png' %}" class="w-8/12" alt="">
+    </section>
+
+    <section class="tab-content">
+        <div class="container">
+            <!-- Tab Content 1 -->
+            <div id="tab-1-content" class="tab-content-item show">
+                <div class="tab-1-content-inner">
+                    <div>
+                        <p class="text-lg">
+                            If you decide Netflix isn't for you - no problem. No commitment.
+                            Cancel online anytime.
+                        </p>
+                        <a href="#" class="btn btn-lg">Watch Free For 30 Days</a>
+                    </div>
+                    <img src="https://i.ibb.co/J2xDJV7/tab-content-1.png" alt="" />
+                </div>
+            </div>
+
+            <!-- Tab Content 2 -->
+            <div id="tab-2-content" class="tab-content-item">
+                <div class="tab-2-content-top">
+                    <p class="text-lg">
+                        Watch TV shows and movies anytime, anywhere — personalized for
+                        you.
+                    </p>
+                    <a href="#" class="btn btn-lg">Watch Free For 30 Days</a>
+                </div>
+                <div class="tab-2-content-bottom">
+                    <div>
+                        <img src="https://i.ibb.co/DpdN7Gn/tab-content-2-1.png" alt="" />
+                        <p class="text-md">
+                            Watch on your TV
+                        </p>
+                        <p class="text-dark">
+                            Smart TVs, PlayStation, Xbox, Chromecast, Apple TV, Blu-ray
+                            players and more.
+                        </p>
+                    </div>
+                    <div>
+                        <img src="https://i.ibb.co/R3r1SPX/tab-content-2-2.png" alt="" />
+                        <p class="text-md">
+                            Watch instantly or download for later
+                        </p>
+                        <p class="text-dark">
+                            Available on phone and tablet, wherever you go.
+                        </p>
+                    </div>
+                    <div>
+                        <img src="https://i.ibb.co/gDhnwWn/tab-content-2-3.png" alt="" />
+                        <p class="text-md">
+                            Use any computer
+                        </p>
+                        <p class="text-dark">
+                            Watch right on Netflix.com.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab Content 3 -->
+            <div id="tab-3-content" class="tab-content-item">
+                <div class="text-center">
+                    <p class="text-lg">
+                        Choose one plan and watch everything on Netflix.
+                    </p>
+                    <a href="#" class="btn btn-lg">Watch Free For 30 Days</a>
+                </div>
+
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Basic</th>
+                            <th>Standard</th>
+                            <th>Premium</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Monthly price after free month ends on 6/19/19</td>
+                            <td>$8.99</td>
+                            <td>$12.99</td>
+                            <td>$15.99</td>
+                        </tr>
+                        <tr>
+                            <td>HD Available</td>
+                            <td><i class="fas fa-times"></i></td>
+                            <td><i class="fas fa-check"></i></td>
+                            <td><i class="fas fa-check"></i></td>
+                        </tr>
+                        <tr>
+                            <td>Ultra HD Available</td>
+                            <td><i class="fas fa-times"></i></td>
+                            <td><i class="fas fa-times"></i></td>
+                            <td><i class="fas fa-check"></i></td>
+                        </tr>
+                        <tr>
+                            <td>Screens you can watch on at the same time</td>
+                            <td>1</td>
+                            <td>2</td>
+                            <td>4</td>
+                        </tr>
+                        <tr>
+                            <td>Watch on your laptop, TV, phone and tablet</td>
+                            <td><i class="fas fa-check"></i></td>
+                            <td><i class="fas fa-check"></i></td>
+                            <td><i class="fas fa-check"></i></td>
+                        </tr>
+                        <tr>
+                            <td>Unlimited movies and TV shows</td>
+                            <td><i class="fas fa-check"></i></td>
+                            <td><i class="fas fa-check"></i></td>
+                            <td><i class="fas fa-check"></i></td>
+                        </tr>
+                        <tr>
+                            <td>Cancel anytime</td>
+                            <td><i class="fas fa-check"></i></td>
+                            <td><i class="fas fa-check"></i></td>
+                            <td><i class="fas fa-check"></i></td>
+                        </tr>
+                        <tr>
+                            <td>First month free</td>
+                            <td><i class="fas fa-check"></i></td>
+                            <td><i class="fas fa-check"></i></td>
+                            <td><i class="fas fa-check"></i></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </section>
 
-    <section class='flex flex-col md:flex-row items-center border-gray-900 border-b-8' style="min-height: 70vh;">
-        <div class='md:w-1/2 flex justify-center items-center '>
-            <img src="{% static 'mobile-0819.jpg' %}" class="w-8/12" alt="">
+    <footer class="footer">
+        <p>Questions? Call 1-866-579-7172</p>
+        <div class="footer-cols">
+            <ul>
+                <li><a href="#">FAQ</a></li>
+                <li><a href="#">Investor Relations</a></li>
+                <li><a href="#">Ways To Watch</a></li>
+                <li><a href="#">Corporate Information</a></li>
+                <li><a href="#">Netflix Originals</a></li>
+            </ul>
+            <ul>
+                <li><a href="#">Help Center</a></li>
+                <li><a href="#">Jobs</a></li>
+                <li><a href="#">Terms Of Use</a></li>
+                <li><a href="#">Contact Us</a></li>
+            </ul>
+            <ul>
+                <li><a href="#">Account</a></li>
+                <li><a href="#">Redeem Gift Cards</a></li>
+                <li><a href="#">Privacy</a></li>
+                <li><a href="#">Speed Test</a></li>
+            </ul>
+            <ul>
+                <li><a href="#">Media Center</a></li>
+                <li><a href="#">Buy Gift Cards</a></li>
+                <li><a href="#">Cookie Preferences</a></li>
+                <li><a href="#">Legal Notices</a></li>
+            </ul>
         </div>
 
-        <div class="md:w-1/2 flex flex-col justify-center text-center md:text-left p-5 md:p-10">
-            <h2 class="md:text-5xl text-4xl font-semibold mb-4">
-                Download your shows to watch offline.
-            </h2>
-            <h5 class="md:text-xl text-lg">
-                Save your favorites easily and always have something to watch.
-            </h5>
-        </div>
-        
-    </section>
+    </footer>
+</body>
+</html>
 
-    <section class='flex flex-col md:flex-row items-center border-gray-900 border-b-8' style="min-height: 70vh;">
-        <div class="md:w-1/2 flex flex-col justify-center text-center md:text-left p-5 md:p-10">
-            <h2 class="md:text-5xl text-4xl font-semibold mb-4">
-                Create profiles for kids.
-            </h2>
-            <h5 class="md:text-xl text-lg">
-                Send kids on adventures with their favorite characters in a space made just for them—free with your membership.
-            </h5>
-        </div>
-        <div class='md:w-1/2 flex justify-center items-center'>
-            <img src="{% static 'netflix_kid.png' %}" class="w-8/12" alt="">
-        </div>
-    </section>
-    
-
-
-{% endblock content %}
+<script src="{% static 'net.js' %}"></script>
